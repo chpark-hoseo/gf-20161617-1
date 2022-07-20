@@ -40,10 +40,38 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w,
         &m_sourceRectangle.h);
 
-    m_destinationRectangle.w = m_sourceRectangle.w;
-    m_destinationRectangle.h = m_sourceRectangle.h;
+    //응용 1번
+    //m_destinationRectangle.w = m_sourceRectangle.w = 50;
+    //m_destinationRectangle.h = m_sourceRectangle.h = 50;
+    //m_destinationRectangle.x = m_sourceRectangle.x = 0;
+    //m_destinationRectangle.y = m_sourceRectangle.y = 0;
+     
+    //응용 2번
+    //m_destinationRectangle.w = m_sourceRectangle.w = 50;
+    //m_destinationRectangle.h = m_sourceRectangle.h = 50;
+    //m_sourceRectangle.x = 0;
+    //m_sourceRectangle.y = 0;
+    //m_destinationRectangle.x = 50;
+    //m_destinationRectangle.y = 50;
+
+    //응용 3번
+    //m_destinationRectangle.w = m_sourceRectangle.w = 50;
+    //m_destinationRectangle.h = m_sourceRectangle.h = 50;
+    //m_sourceRectangle.x = 50;
+    //m_sourceRectangle.y = 50;
+    //m_destinationRectangle.x = 50;
+    //m_destinationRectangle.y = 50;
+
+    //응용 4번
+    m_destinationRectangle.w = m_sourceRectangle.w = width;
+    m_destinationRectangle.h = m_sourceRectangle.h = height;
     m_destinationRectangle.x = m_sourceRectangle.x = 0;
     m_destinationRectangle.y = m_sourceRectangle.y = 0;
+
+    //m_destinationRectangle.w = m_sourceRectangle.w;
+    //m_destinationRectangle.h = m_sourceRectangle.h;
+    //m_destinationRectangle.x = m_sourceRectangle.x = 0;
+    //m_destinationRectangle.y = m_sourceRectangle.y = 0;
 
     m_bRunning = true;
     return true;
@@ -73,7 +101,7 @@ void Game::MoveSide()
 
 void Game::update()
 {
-    MoveSide();
+    //MoveSide();
 }
 
 void Game::render()
