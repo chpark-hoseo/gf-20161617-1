@@ -9,6 +9,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -21,6 +22,13 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     else {
         return false; // SDL 초기화 실패
     }
+
+
+    SDL_Surface* pTempSurface = SDL_LoadBMP("Assets/rider.bmp");
+
+    m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
+
+    SDL_FreeSurface(pTempSurface);
 
     m_bRunning = true;
     return true;
@@ -44,7 +52,7 @@ bool Game::running()
 void Game::handleEvents()
 {
     SDL_Event event;
-    if (SDL_PollEvent(&event)) {
+    while (SDL_PollEvent(&event)) {
         switch (event.type) {
         case SDL_QUIT:
             m_bRunning = false;
