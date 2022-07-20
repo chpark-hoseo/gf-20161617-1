@@ -26,21 +26,60 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
     SDL_Surface* pTempSurface = SDL_LoadBMP("Assets/rider.bmp");
 
-    m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
+    if (pTempSurface == nullptr)
+    {
 
-    SDL_FreeSurface(pTempSurface);
+    }
+    else
+    {
+        m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
+
+        SDL_FreeSurface(pTempSurface);
+    }
+   
+    SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w,
+        &m_sourceRectangle.h);
+
+    m_destinationRectangle.w = m_sourceRectangle.w;
+    m_destinationRectangle.h = m_sourceRectangle.h;
+    m_destinationRectangle.x = m_sourceRectangle.x = 0;
+    m_destinationRectangle.y = m_sourceRectangle.y = 0;
 
     m_bRunning = true;
     return true;
 }
 
+void Game::MoveSide()
+{
+    if (m_destinationRectangle.x <= 0)
+    {
+        moveRight = true;
+    }
+    else if (m_destinationRectangle.x >= 520)
+    {
+        moveRight = false;
+    }
+
+    if (moveRight == true)
+    {
+        m_destinationRectangle.x += 1;
+    }
+    else
+    {
+        m_destinationRectangle.x -= 1;
+    }
+    SDL_Delay(10);
+}
+
 void Game::update()
 {
+    MoveSide();
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer);
+    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
     SDL_RenderPresent(m_pRenderer);
 }
 

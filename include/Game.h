@@ -15,7 +15,11 @@ public:
     void handleEvents();
     void clean();
 
+    void MoveSide();
+
 private:
+    bool moveRight = true;
+
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
     bool m_bRunning;
