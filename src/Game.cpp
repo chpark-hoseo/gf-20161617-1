@@ -24,7 +24,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     }
 
 
-    SDL_Surface* pTempSurface = SDL_LoadBMP("Assets/rider.bmp");
+    //SDL_Surface* pTempSurface = SDL_LoadBMP("Assets/rider.bmp");
+    SDL_Surface* pTempSurface = SDL_LoadBMP("Assets/animate.bmp");
 
     if (pTempSurface == nullptr)
     {
@@ -37,8 +38,11 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         SDL_FreeSurface(pTempSurface);
     }
    
-    SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w,
-        &m_sourceRectangle.h);
+    //SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w,
+    //    &m_sourceRectangle.h);
+
+    m_sourceRectangle.w = 128;
+    m_sourceRectangle.h = 82;
 
     //응용 1번
     //m_destinationRectangle.w = m_sourceRectangle.w = 50;
@@ -63,8 +67,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     //m_destinationRectangle.y = 50;
 
     //응용 4번
-    m_destinationRectangle.w = m_sourceRectangle.w = width;
-    m_destinationRectangle.h = m_sourceRectangle.h = height;
+    m_destinationRectangle.w = m_sourceRectangle.w;
+    m_destinationRectangle.h = m_sourceRectangle.h;
     m_destinationRectangle.x = m_sourceRectangle.x = 0;
     m_destinationRectangle.y = m_sourceRectangle.y = 0;
 
@@ -101,7 +105,7 @@ void Game::MoveSide()
 
 void Game::update()
 {
-    //MoveSide();
+    m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
 }
 
 void Game::render()
